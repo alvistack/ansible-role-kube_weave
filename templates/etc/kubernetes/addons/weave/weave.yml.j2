@@ -245,4 +245,4 @@ metadata:
   name: weave-net
   namespace: kube-system
 data:
-  WEAVE_PASSWORD: "{{ weave_password | default("") | b64encode }}"
+  WEAVE_PASSWORD: "{{ weave_password | b64encode }}"

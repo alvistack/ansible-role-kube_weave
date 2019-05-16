@@ -21,7 +21,7 @@ weave_version: "2.5.2"
 weave_image_repository: "docker.io/weaveworks"
 
 # Weave's network password for encryption, if null then no network encryption.
-weave_password: ~
+weave_password: ""
 
 # If set to 1, disable checking for new Weave Net versions (default is blank,
 # i.e. check is enabled)
