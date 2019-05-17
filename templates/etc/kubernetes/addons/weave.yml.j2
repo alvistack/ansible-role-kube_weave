@@ -1,18 +1,33 @@
 ---
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: weave-net
-  labels:
-    name: weave-net
   namespace: kube-system
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   name: weave-net
   labels:
-    name: weave-net
+    addonmanager.kubernetes.io/mode: Reconcile
 rules:
   - apiGroups:
       - ''
@@ -45,7 +60,7 @@ kind: ClusterRoleBinding
 metadata:
   name: weave-net
   labels:
-    name: weave-net
+    addonmanager.kubernetes.io/mode: EnsureExists
 roleRef:
   kind: ClusterRole
   name: weave-net
@@ -59,9 +74,9 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
 metadata:
   name: weave-net
-  labels:
-    name: weave-net
   namespace: kube-system
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
 rules:
   - apiGroups:
       - ''
@@ -83,9 +98,9 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
   name: weave-net
-  labels:
-    name: weave-net
   namespace: kube-system
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
 roleRef:
   kind: Role
   name: weave-net
@@ -99,15 +114,19 @@ apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: weave-net
-  labels:
-    name: weave-net
   namespace: kube-system
+  labels:
+    app.kubernetes.io/name: weave-net
+    app.kubernetes.io/part-of: kube-system
+    addonmanager.kubernetes.io/mode: Reconcile
 spec:
   minReadySeconds: 5
   template:
     metadata:
       labels:
-        name: weave-net
+        app.kubernetes.io/name: weave-net
+        app.kubernetes.io/part-of: kube-system
+        addonmanager.kubernetes.io/mode: Reconcile
     spec:
       containers:
         - name: weave
@@ -119,11 +138,13 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: spec.nodeName
+{% if weave_password %}
             - name: WEAVE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: weave-net
                   key: WEAVE_PASSWORD
+{% endif %}
             - name: CHECKPOINT_DISABLE
               value: "{{ weave_checkpoint_disable | bool | int }}"
             - name: CONN_LIMIT
@@ -238,11 +259,15 @@ spec:
             type: FileOrCreate
   updateStrategy:
     type: RollingUpdate
+{% if weave_password %}
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: weave-net
   namespace: kube-system
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
 data:
   WEAVE_PASSWORD: "{{ weave_password | b64encode }}"
+{% endif %}
