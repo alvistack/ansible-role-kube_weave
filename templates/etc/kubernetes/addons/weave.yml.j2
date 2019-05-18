@@ -20,6 +20,8 @@ metadata:
   name: weave-net
   namespace: kube-system
   labels:
+    app.kubernetes.io/name: weave-net
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
 
 ---
@@ -28,6 +30,8 @@ kind: ClusterRole
 metadata:
   name: weave-net
   labels:
+    app.kubernetes.io/name: weave-net
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
 rules:
   - apiGroups:
@@ -62,6 +66,8 @@ kind: ClusterRoleBinding
 metadata:
   name: weave-net
   labels:
+    app.kubernetes.io/name: weave-net
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: EnsureExists
 roleRef:
   kind: ClusterRole
@@ -79,6 +85,8 @@ metadata:
   name: weave-net
   namespace: kube-system
   labels:
+    app.kubernetes.io/name: weave-net
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: Reconcile
 rules:
   - apiGroups:
@@ -104,6 +112,8 @@ metadata:
   name: weave-net
   namespace: kube-system
   labels:
+    app.kubernetes.io/name: weave-net
+    app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: EnsureExists
 roleRef:
   kind: Role
@@ -143,13 +153,6 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: spec.nodeName
-{% if weave_password %}
-            - name: WEAVE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: weave-net
-                  key: WEAVE_PASSWORD
-{% endif %}
             - name: CHECKPOINT_DISABLE
               value: "{{ weave_checkpoint_disable | bool | int }}"
             - name: CONN_LIMIT
@@ -160,6 +163,14 @@ spec:
               value: "{{ weave_pod_subnet }}"
             - name: EXPECT_NPC
               value: "{{ weave_expect_npc | bool | int }}"
+            - name: WEAVE_MTU
+              value: "{{ weave_mtu | int }}"
+            - name: NO_MASQ_LOCAL
+              value: "{{ weave_no_masq_local | bool | int }}"
+{% if weave_password %}
+            - name: WEAVE_PASSWORD
+              value: "{{ weave_password }}"
+{% endif %}
 {% if weave_kube_peers %}
             - name: KUBE_PEERS
               value: "{{ weave_kube_peers }}"
@@ -180,10 +191,6 @@ spec:
             - name: WEAVE_STATUS_ADDR
               value: "{{ weave_status_addr }}"
 {% endif %}
-            - name: WEAVE_MTU
-              value: "{{ weave_mtu | int }}"
-            - name: NO_MASQ_LOCAL
-              value: "{{ weave_no_masq_local | bool | int }}"
 {% if weave_extra_args %}
             - name: EXTRA_ARGS
               value: "{{ weave_extra_args }}"
@@ -264,16 +271,3 @@ spec:
             type: FileOrCreate
   updateStrategy:
     type: RollingUpdate
-{% if weave_password %}
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: weave-net
-  namespace: kube-system
-  labels:
-    addonmanager.kubernetes.io/mode: Reconcile
-data:
-  WEAVE_PASSWORD: "{{ weave_password | b64encode }}"
-{% endif %}
