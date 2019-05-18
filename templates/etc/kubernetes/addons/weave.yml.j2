@@ -21,6 +21,7 @@ metadata:
   namespace: kube-system
   labels:
     addonmanager.kubernetes.io/mode: Reconcile
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -54,6 +55,7 @@ rules:
     verbs:
       - patch
       - update
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -69,6 +71,7 @@ subjects:
   - kind: ServiceAccount
     name: weave-net
     namespace: kube-system
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
@@ -93,6 +96,7 @@ rules:
       - configmaps
     verbs:
       - create
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
@@ -109,6 +113,7 @@ subjects:
   - kind: ServiceAccount
     name: weave-net
     namespace: kube-system
+
 ---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
@@ -260,6 +265,7 @@ spec:
   updateStrategy:
     type: RollingUpdate
 {% if weave_password %}
+
 ---
 apiVersion: v1
 kind: Secret
