@@ -69,14 +69,14 @@ metadata:
     app.kubernetes.io/name: weave-net
     app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: EnsureExists
-roleRef:
-  kind: ClusterRole
-  name: weave-net
-  apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: ServiceAccount
     name: weave-net
     namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: weave-net
+  apiGroup: rbac.authorization.k8s.io
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -115,14 +115,14 @@ metadata:
     app.kubernetes.io/name: weave-net
     app.kubernetes.io/part-of: kube-system
     addonmanager.kubernetes.io/mode: EnsureExists
-roleRef:
-  kind: Role
-  name: weave-net
-  apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: ServiceAccount
     name: weave-net
     namespace: kube-system
+roleRef:
+  kind: Role
+  name: weave-net
+  apiGroup: rbac.authorization.k8s.io
 
 ---
 apiVersion: extensions/v1beta1
