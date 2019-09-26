@@ -136,6 +136,11 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   minReadySeconds: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: weave-net
+      app.kubernetes.io/part-of: kube-system
+      addonmanager.kubernetes.io/mode: Reconcile
   template:
     metadata:
       labels:
