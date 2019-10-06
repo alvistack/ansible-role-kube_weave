@@ -25,7 +25,7 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: weave-net
@@ -61,7 +61,7 @@ rules:
       - update
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: weave-net
@@ -79,7 +79,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: weave-net
@@ -106,7 +106,7 @@ rules:
       - create
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: weave-net
@@ -125,7 +125,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: weave-net
@@ -136,6 +136,11 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   minReadySeconds: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: weave-net
+      app.kubernetes.io/part-of: kube-system
+      addonmanager.kubernetes.io/mode: Reconcile
   template:
     metadata:
       labels:
