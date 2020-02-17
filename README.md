@@ -1,8 +1,8 @@
 # Ansible Role for Weave on Kubernetes
 
-[![Travis](https://img.shields.io/travis/alvistack/ansible-role-kubernetes-weave.svg)](https://travis-ci.org/alvistack/ansible-role-kubernetes-weave)
-[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-kubernetes-weave.svg)](https://github.com/alvistack/ansible-role-kubernetes-weave)
-[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-kubernetes-weave.svg)](https://github.com/alvistack/ansible-role-kubernetes-weave/blob/master/LICENSE)
+[![Travis](https://img.shields.io/travis/alvistack/ansible-role-kubernetes_weave.svg)](https://travis-ci.org/alvistack/ansible-role-kubernetes_weave)
+[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-kubernetes_weave.svg)](https://github.com/alvistack/ansible-role-kubernetes_weave)
+[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-kubernetes_weave.svg)](https://github.com/alvistack/ansible-role-kubernetes_weave/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.kubernetes_weave-blue.svg)](https://galaxy.ansible.com/alvistack/kubernetes_weave)
 
 Ansible Role for Weave on Kubernetes Installation.
