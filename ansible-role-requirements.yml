@@ -30,8 +30,20 @@
   src: https://github.com/alvistack/ansible-role-cri_tools
   version: develop
 
-- name: docker
-  src: https://github.com/alvistack/ansible-role-docker
+- name: containers_common
+  src: https://github.com/alvistack/ansible-role-containers_common
+  version: develop
+
+- name: runc
+  src: https://github.com/alvistack/ansible-role-runc
+  version: develop
+
+- name: conmon
+  src: https://github.com/alvistack/ansible-role-conmon
+  version: develop
+
+- name: cri_o
+  src: https://github.com/alvistack/ansible-role-cri_o
   version: develop
 
 - name: kubectl
@@ -52,10 +64,6 @@
 
 - name: kube_master
   src: https://github.com/alvistack/ansible-role-kube_master
-  version: develop
-
-- name: kube_node
-  src: https://github.com/alvistack/ansible-role-kube_node
   version: develop
 
 - name: kubernetes_addon_manager
