@@ -172,34 +172,34 @@ spec:
               value: "{{ weave_mtu | int }}"
             - name: NO_MASQ_LOCAL
               value: "{{ weave_no_masq_local | bool | int }}"
-{% if weave_password %}
+{% if weave_password -%}
             - name: WEAVE_PASSWORD
               value: "{{ weave_password }}"
-{% endif %}
-{% if weave_kube_peers %}
+{%- endif %}
+{% if weave_kube_peers -%}
             - name: KUBE_PEERS
               value: "{{ weave_kube_peers }}"
-{% endif %}
-{% if weave_ipalloc_init %}
+{%- endif %}
+{% if weave_ipalloc_init -%}
             - name: IPALLOC_INIT
               value: "{{ weave_ipalloc_init }}"
-{% endif %}
-{% if weave_expose_ip %}
+{%- endif %}
+{% if weave_expose_ip -%}
             - name: WEAVE_EXPOSE_IP
               value: "{{ weave_expose_ip }}"
-{% endif %}
-{% if weave_metrics_addr %}
+{%- endif %}
+{% if weave_metrics_addr -%}
             - name: WEAVE_METRICS_ADDR
               value: "{{ weave_metrics_addr }}"
-{% endif %}
-{% if weave_status_addr %}
+{%- endif %}
+{% if weave_status_addr -%}
             - name: WEAVE_STATUS_ADDR
               value: "{{ weave_status_addr }}"
-{% endif %}
-{% if weave_extra_args %}
+{%- endif %}
+{% if weave_extra_args -%}
             - name: EXTRA_ARGS
               value: "{{ weave_extra_args }}"
-{% endif %}
+{%- endif %}
           image: {{ weave_image_repository }}/weave-kube:{{ weave_version }}
           readinessProbe:
             httpGet:
