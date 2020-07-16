@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Weave version.
-weave_version: "2.6.4"
+weave_version: "2.6.5"
 
 # ImageRepository sets the container registry to pull images from.
 weave_image_repository: "docker.io/weaveworks"
