@@ -158,6 +158,8 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: spec.nodeName
+            - name: INIT_CONTAINER
+              value: 'true'
             - name: CHECKPOINT_DISABLE
               value: "{{ weave_checkpoint_disable | bool | int }}"
             - name: CONN_LIMIT
@@ -209,22 +211,18 @@ spec:
               port: 6784
           resources:
             requests:
-              cpu: 10m
+              cpu: 50m
+              memory: 100Mi
           securityContext:
             privileged: true
           volumeMounts:
             - name: weavedb
               mountPath: /weavedb
-            - name: cni-bin
-              mountPath: /host/opt
-            - name: cni-bin2
-              mountPath: /host/home
-            - name: cni-conf
-              mountPath: /host/etc
             - name: dbus
               mountPath: /host/var/lib/dbus
-            - name: lib-modules
-              mountPath: /lib/modules
+            - name: machine-id
+              mountPath: /host/etc/machine-id
+              readOnly: true
             - name: xtables-lock
               mountPath: /run/xtables.lock
         - name: weave-npc
@@ -238,21 +236,43 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              cpu: 10m
+              cpu: 50m
+              memory: 100Mi
           securityContext:
             privileged: true
           volumeMounts:
             - name: xtables-lock
               mountPath: /run/xtables.lock
-      hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
-      hostPID: true
+      hostNetwork: true
+      initContainers:
+        - name: weave-init
+          command:
+            - /home/weave/init.sh
+          image: {{ weave_image_repository }}/weave-kube:{{ weave_version }}
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: cni-bin
+              mountPath: /host/opt
+            - name: cni-bin2
+              mountPath: /host/home
+            - name: cni-conf
+              mountPath: /host/etc
+            - name: lib-modules
+              mountPath: /lib/modules
+            - name: xtables-lock
+              mountPath: /run/xtables.lock
+      priorityClassName: system-node-critical
       restartPolicy: Always
       securityContext:
         seLinuxOptions: {}
       serviceAccountName: weave-net
       tolerations:
         - effect: NoSchedule
+          operator: Exists
+        - effect: NoExecute
           operator: Exists
       volumes:
         - name: weavedb
@@ -273,6 +293,10 @@ spec:
         - name: lib-modules
           hostPath:
             path: /lib/modules
+        - name: machine-id
+          hostPath:
+            path: /etc/machine-id
+            type: FileOrCreate
         - name: xtables-lock
           hostPath:
             path: /run/xtables.lock
