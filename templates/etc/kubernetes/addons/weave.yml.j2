@@ -201,6 +201,7 @@ spec:
               value: "{{ weave_extra_args }}"
 {%- endif %}
           image: {{ weave_image_repository }}/weave-kube:{{ weave_version }}
+          imagePullPolicy: IfNotPresent
           readinessProbe:
             httpGet:
               host: 127.0.0.1
@@ -234,6 +235,7 @@ spec:
                   apiVersion: v1
                   fieldPath: spec.nodeName
           image: {{ weave_image_repository }}/weave-npc:{{ weave_version }}
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: 10m
