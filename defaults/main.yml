@@ -14,12 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Weave version.
-weave_version: "2.8.1"
-
-# ImageRepository sets the container registry to pull images from.
-weave_image_repository: "docker.io/weaveworks"
-
 # Weave's network password for encryption, if null then no network encryption.
 weave_password: ~
 
