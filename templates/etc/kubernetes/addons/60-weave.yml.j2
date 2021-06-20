@@ -202,7 +202,7 @@ spec:
             - name: EXTRA_ARGS
               value: "{{ weave_extra_args }}"
 {%- endif %}
-          image: {{ weave_image_repository }}/weave-kube:{{ weave_version }}
+          image: docker.io/weaveworks/weave-kube:2.8.1
           imagePullPolicy: IfNotPresent
           readinessProbe:
             httpGet:
@@ -232,7 +232,7 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: spec.nodeName
-          image: {{ weave_image_repository }}/weave-npc:{{ weave_version }}
+          image: docker.io/weaveworks/weave-npc:2.8.1
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -249,7 +249,7 @@ spec:
         - name: weave-init
           command:
             - /home/weave/init.sh
-          image: {{ weave_image_repository }}/weave-kube:{{ weave_version }}
+          image: docker.io/weaveworks/weave-kube:2.8.1
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
