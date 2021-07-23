@@ -1,6 +1,9 @@
 # Ansible Role for Weave on Kubernetes
 
-[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-kube_weave/master)](https://gitlab.com/alvistack/ansible-role-kube_weave/-/pipelines) [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-kube_weave.svg)](https://github.com/alvistack/ansible-role-kube_weave/releases) [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-kube_weave.svg)](https://github.com/alvistack/ansible-role-kube_weave/blob/master/LICENSE) [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.kube_weave-blue.svg)](https://galaxy.ansible.com/alvistack/kube_weave)
+[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-kube_weave/master)](https://gitlab.com/alvistack/ansible-role-kube_weave/-/pipelines)
+[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-kube_weave.svg)](https://github.com/alvistack/ansible-role-kube_weave/releases)
+[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-kube_weave.svg)](https://github.com/alvistack/ansible-role-kube_weave/blob/master/LICENSE)
+[![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.kube_weave-blue.svg)](https://galaxy.ansible.com/alvistack/kube_weave)
 
 Ansible Role for Weave on Kubernetes Installation.
 
