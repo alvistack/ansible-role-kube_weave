@@ -161,46 +161,46 @@ spec:
             - name: INIT_CONTAINER
               value: 'true'
             - name: CHECKPOINT_DISABLE
-              value: "{{ weave_checkpoint_disable | bool | int }}"
+              value: "{{ kube_weave_checkpoint_disable | bool | int }}"
             - name: CONN_LIMIT
-              value: "{{ weave_conn_limit | int }}"
+              value: "{{ kube_weave_conn_limit | int }}"
             - name: HAIRPIN_MODE
-              value: "{{ weave_hairpin_mode | bool | lower }}"
+              value: "{{ kube_weave_hairpin_mode | bool | lower }}"
             - name: IPALLOC_RANGE
-              value: "{{ weave_pod_subnet }}"
+              value: "{{ kube_weave_pod_subnet }}"
             - name: EXPECT_NPC
-              value: "{{ weave_expect_npc | bool | int }}"
+              value: "{{ kube_weave_expect_npc | bool | int }}"
             - name: WEAVE_MTU
-              value: "{{ weave_mtu | int }}"
+              value: "{{ kube_weave_mtu | int }}"
             - name: NO_MASQ_LOCAL
-              value: "{{ weave_no_masq_local | bool | int }}"
-{% if weave_password -%}
+              value: "{{ kube_weave_no_masq_local | bool | int }}"
+{% if kube_weave_password -%}
             - name: WEAVE_PASSWORD
-              value: "{{ weave_password }}"
+              value: "{{ kube_weave_password }}"
 {%- endif %}
-{% if weave_kube_peers -%}
+{% if kube_weave_kube_peers -%}
             - name: KUBE_PEERS
-              value: "{{ weave_kube_peers }}"
+              value: "{{ kube_weave_kube_peers }}"
 {%- endif %}
-{% if weave_ipalloc_init -%}
+{% if kube_weave_ipalloc_init -%}
             - name: IPALLOC_INIT
-              value: "{{ weave_ipalloc_init }}"
+              value: "{{ kube_weave_ipalloc_init }}"
 {%- endif %}
-{% if weave_expose_ip -%}
+{% if kube_weave_expose_ip -%}
             - name: WEAVE_EXPOSE_IP
-              value: "{{ weave_expose_ip }}"
+              value: "{{ kube_weave_expose_ip }}"
 {%- endif %}
-{% if weave_metrics_addr -%}
+{% if kube_weave_metrics_addr -%}
             - name: WEAVE_METRICS_ADDR
-              value: "{{ weave_metrics_addr }}"
+              value: "{{ kube_weave_metrics_addr }}"
 {%- endif %}
-{% if weave_status_addr -%}
+{% if kube_weave_status_addr -%}
             - name: WEAVE_STATUS_ADDR
-              value: "{{ weave_status_addr }}"
+              value: "{{ kube_weave_status_addr }}"
 {%- endif %}
-{% if weave_extra_args -%}
+{% if kube_weave_extra_args -%}
             - name: EXTRA_ARGS
-              value: "{{ weave_extra_args }}"
+              value: "{{ kube_weave_extra_args }}"
 {%- endif %}
           image: docker.io/weaveworks/weave-kube:2.8.1
           imagePullPolicy: IfNotPresent
