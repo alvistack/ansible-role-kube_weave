@@ -60,7 +60,7 @@ kube_weave_status_addr: ~
 # Weave Net defaults to 1376 bytes, but you can set a smaller size if your
 # underlying network has a tighter limit, or set a larger size for better
 # performance if your network supports jumbo frames (e.g. 8916)
-kube_weave_mtu: "{{ ((((ansible_default_ipv4.mtu - 84) / 8) | round(0, 'floor')) * 8) | int }}"
+kube_weave_mtu: "{{ (((ansible_default_ipv4.mtu - 84) // 8) * 8) | int }}"
 
 # Set to 1 to preserve the client source IP address when accessing Service
 # annotated with `service.spec.externalTrafficPolicy=Local`. The feature works
