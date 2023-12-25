@@ -255,11 +255,11 @@ spec:
             privileged: true
           volumeMounts:
             - name: cni-bin
-              mountPath: /host/opt
+              mountPath: /host/opt/cni/bin
             - name: cni-bin2
               mountPath: /host/home
             - name: cni-conf
-              mountPath: /host/etc
+              mountPath: /host/etc/cni/net.d
             - name: lib-modules
               mountPath: /lib/modules
             - name: xtables-lock
@@ -280,13 +280,13 @@ spec:
             path: /var/lib/weave
         - name: cni-bin
           hostPath:
-            path: /opt
+            path: {{ kube_weave_cni_plugin_dirs }}
         - name: cni-bin2
           hostPath:
             path: /home
         - name: cni-conf
           hostPath:
-            path: /etc
+            path: {{ kube_weave_network_config_dir }}
         - name: dbus
           hostPath:
             path: /var/lib/dbus

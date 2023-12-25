@@ -14,6 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Path to directory where CNI plugin binaries are located.
+kube_weave_cni_plugin_dirs: "/opt/cni/bin"
+
+# Path to the directory where network configuration files are located.
+kube_weave_network_config_dir: "/etc/cni/net.d"
+
 # Weave's network password for encryption, if null then no network encryption.
 kube_weave_password: ~
 
