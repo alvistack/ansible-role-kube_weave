@@ -15,14 +15,13 @@
 # limitations under the License.
 
 # Path to directory where CNI plugin binaries are located.
-kube_weave_cni_plugin_dirs: "/opt/cni/bin"
+kube_weave_cni_plugin_dirs: /opt/cni/bin
 
 # Path to the directory where network configuration files are located.
-kube_weave_network_config_dir: "/etc/cni/net.d"
+kube_weave_network_config_dir: /etc/cni/net.d
 
 # Weave's network password for encryption, if null then no network encryption.
-kube_weave_password: ~
-
+kube_weave_password:
 # If set to 1, disable checking for new Weave Net versions (default is blank,
 # i.e. check is enabled)
 kube_weave_checkpoint_disable: false
@@ -38,31 +37,26 @@ kube_weave_hairpin_mode: true
 
 # The range of IP addresses used by Weave Net and the subnet they are placed in
 # (CIDR format; default 10.32.0.0/12)
-kube_weave_pod_subnet: "10.233.64.0/18"
+kube_weave_pod_subnet: 10.233.64.0/18
 
 # Set to 0 to disable Network Policy Controller (default is on)
 kube_weave_expect_npc: true
 
 # List of addresses of peers in the Kubernetes cluster (default is to fetch the
 # list from the api-server)
-kube_weave_kube_peers: ~
-
+kube_weave_kube_peers:
 # Set the initialization mode of the IP Address Manager (defaults to consensus
 # amongst the KUBE_PEERS)
-kube_weave_ipalloc_init: ~
-
+kube_weave_ipalloc_init:
 # Set the IP address used as a gateway from the Weave network to the host
 # network - this is useful if you are configuring the addon as a static pod.
-kube_weave_expose_ip: ~
-
+kube_weave_expose_ip:
 # Address and port that the Weave Net daemon will serve Prometheus-style
 # metrics on (defaults to 0.0.0.0:6782)
-kube_weave_metrics_addr: ~
-
+kube_weave_metrics_addr:
 # Address and port that the Weave Net daemon will serve status requests on
 # (defaults to disabled)
-kube_weave_status_addr: ~
-
+kube_weave_status_addr:
 # Weave Net defaults to 1376 bytes, but you can set a smaller size if your
 # underlying network has a tighter limit, or set a larger size for better
 # performance if your network supports jumbo frames (e.g. 8916)
@@ -75,4 +69,4 @@ kube_weave_no_masq_local: true
 
 # Extra variables that passing to launch.sh, useful for enabling seed mode, see
 # https://www.weave.works/docs/net/latest/tasks/ipam/ipam/
-kube_weave_extra_args: ~
+kube_weave_extra_args:
